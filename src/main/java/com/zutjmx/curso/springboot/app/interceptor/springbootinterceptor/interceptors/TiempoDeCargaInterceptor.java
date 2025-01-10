@@ -54,7 +54,7 @@ public class TiempoDeCargaInterceptor implements HandlerInterceptor {
         long tiempoInicio = System.currentTimeMillis();
         request.setAttribute("tiempoInicio", tiempoInicio);
         Random random = new Random();
-        Integer demora = random.nextInt(500);
+        Integer demora = random.nextInt(2000);
         Thread.sleep(demora);
         //Simular demora fin
         
