@@ -19,8 +19,9 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry
         .addInterceptor(tiempoInterceptor)
-        .addPathPatterns(
-            "/app/info","/app/gotcharacter"
+        .excludePathPatterns(
+            "/app/lebowskiquote",
+            "/app/gotcharacter"
         );
     }
 
