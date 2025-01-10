@@ -17,7 +17,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @SuppressWarnings("null")
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tiempoInterceptor);
+        registry
+        .addInterceptor(tiempoInterceptor)
+        .addPathPatterns(
+            "/app/info","/app/gotcharacter"
+        );
     }
 
 }
