@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,7 @@ public class TiempoDeCargaInterceptor implements HandlerInterceptor {
         Object handler,
         @Nullable ModelAndView modelAndView
     ) throws Exception {
+        Logger.info("Controlador: " + ((HandlerMethod) handler).getMethod().getName());
         Logger.info("TiempoDeCargaInterceptor: postHandle() llamado");        
     }
 
@@ -33,6 +35,8 @@ public class TiempoDeCargaInterceptor implements HandlerInterceptor {
         HttpServletResponse response, 
         Object handler
     ) throws Exception {
+        HandlerMethod controlador = (HandlerMethod) handler;
+        Logger.info("Controlador: " + controlador.getMethod().getName());
         Logger.info("TiempoDeCargaInterceptor: preHandle() llamado");
         return true;
     }
