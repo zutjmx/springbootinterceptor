@@ -1,5 +1,7 @@
 package com.zutjmx.curso.springboot.app.interceptor.springbootinterceptor.interceptors;
 
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
@@ -24,6 +26,15 @@ public class TiempoDeCargaInterceptor implements HandlerInterceptor {
         Object handler,
         @Nullable ModelAndView modelAndView
     ) throws Exception {
+        //Para medir tiempo transcurrido ini
+        long tiempoFinal = System.currentTimeMillis();
+        long tiempoInicio = (long) request.getAttribute("tiempoInicio");
+        long tiempoTranscurrido = tiempoFinal - tiempoInicio;
+        if (handler instanceof HandlerMethod) {
+            Logger.info("tiempoTranscurrido: " + tiempoTranscurrido + " en milisegundos");
+        }
+        //Para medir tiempo transcurrido fin
+
         Logger.info("Controlador: " + ((HandlerMethod) handler).getMethod().getName());
         Logger.info("TiempoDeCargaInterceptor: postHandle() llamado");        
     }
@@ -38,6 +49,15 @@ public class TiempoDeCargaInterceptor implements HandlerInterceptor {
         HandlerMethod controlador = (HandlerMethod) handler;
         Logger.info("Controlador: " + controlador.getMethod().getName());
         Logger.info("TiempoDeCargaInterceptor: preHandle() llamado");
+        
+        //Simular demora ini
+        long tiempoInicio = System.currentTimeMillis();
+        request.setAttribute("tiempoInicio", tiempoInicio);
+        Random random = new Random();
+        Integer demora = random.nextInt(500);
+        Thread.sleep(demora);
+        //Simular demora fin
+        
         return true;
     }
 
